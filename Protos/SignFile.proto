@@ -1,0 +1,36 @@
+syntax = "proto3";
+
+option csharp_namespace = "GrpcServiceSigner";
+
+package SignFile;
+
+service SignFile {
+	rpc Sign(SignReq) returns (SignRes);
+
+	rpc GetFileSigned(FileSignedReq) returns (FileSignedRes);
+}
+
+message SignReq {
+	string fileName = 1;
+	int32 x = 2;
+	int32 y = 3;
+	int32 w = 4;
+	int32 h = 5;
+	bytes signatureImg = 6;
+	bytes chunk = 7;
+}
+
+message SignRes {
+	bool success = 1;
+	string txn = 2;
+	string msg = 3;
+}
+
+message FileSignedReq {
+	string txn = 1;
+}
+
+message FileSignedRes {
+	bool success = 1;
+	bytes chunk = 2;
+}
