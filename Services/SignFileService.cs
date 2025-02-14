@@ -14,7 +14,6 @@ namespace GrpcServiceSigner.Services
 
         public override Task<LoginRes> Login(LoginReq request, ServerCallContext context)
         {
-            Console.WriteLine(request.UserId);
             clients.Add(request.UserId, new ClientPayload { ClientId = request.ClientId, ClientSecret = request.ClientSecret, ProfileId = request.ProfileId });
             return Task.FromResult(new LoginRes
             {
@@ -24,7 +23,6 @@ namespace GrpcServiceSigner.Services
 
         public override async Task<SignRes> Sign(SignReq req, ServerCallContext context)
         {
-            Console.WriteLine(clients.Count);
             ClientPayload user = clients[req.UserId];
             RemoteSigner remoteSigner = new RemoteSigner(user.ClientSecret, user.ClientId, user.ProfileId, req.UserId);
             // Save file to input
@@ -49,6 +47,9 @@ namespace GrpcServiceSigner.Services
                     };
                 default:
                     byte[] fileContent = await File.ReadAllBytesAsync(signedFile);
+                    File.Delete(pdfFile);
+                    File.Delete(signatureImg);
+                    File.Delete(signedFile);
                     return new SignRes
                     {
                         Success = true,

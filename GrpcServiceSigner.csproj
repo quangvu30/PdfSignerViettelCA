@@ -20,4 +20,9 @@
     <PackageReference Include="iTextSharp" Version="5.5.3" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="input\" />
+    <Folder Include="output\" />
+  </ItemGroup>
+
 </Project>

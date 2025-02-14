@@ -67,7 +67,7 @@ namespace GrpcServiceSigner.Services
         private string clientId = "";
         private string profileId = "";
         private string userId = "";
-        private string hashAlgo = "";
+        private string hashAlgo = "1.2.840.113549.1.1.1";
         string output = Path.Join(Directory.GetCurrentDirectory(), "output");
         string input = Path.Join(Directory.GetCurrentDirectory(), "input");
 
@@ -137,7 +137,7 @@ namespace GrpcServiceSigner.Services
             foreach(string cert in certInfo.Cert.Certificates)
             {
                 chain.Add(CertUtils.GetX509Cert(cert));
-                if (chain.Count == 2) break;
+                // if (chain.Count == 2) break;
             }
             Console.WriteLine($"[{userId}] Load cert done.");
 
@@ -228,10 +228,11 @@ namespace GrpcServiceSigner.Services
             {
                 await Task.Delay(2000);
                 status = await GetSignStatus();
-                if (timeout > 100)
+                if (timeout > 60)
                 {
                     return "timeout";
                 }
+                timeout++;
             }
             Console.WriteLine($"[{userId}] Signing process finished.");
             TimestampConfig timestampConfig = new TimestampConfig { UseTimestamp = false };
