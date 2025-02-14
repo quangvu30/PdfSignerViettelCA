@@ -63,11 +63,11 @@ namespace GrpcServiceSigner.Services
         private readonly HttpClient client = new HttpClient();
         private SignPdfFile signer = new SignPdfFile();
         private string host = "https://remotesigning.viettel.vn";
-        private string clientSecret = "860c5746f30d705ef9b16e0adbd7b5f6d8c4a4ee";
-        private string clientId = "Test_Demo_Mysign";
-        private string profileId = "adss:ras:profile:001";
-        private string userId = "024200014507";
-        private string hashAlgo = "2.16.840.1.101.3.4.2.1";
+        private string clientSecret = "";
+        private string clientId = "";
+        private string profileId = "";
+        private string userId = "";
+        private string hashAlgo = "";
         string output = Path.Join(Directory.GetCurrentDirectory(), "output");
         string input = Path.Join(Directory.GetCurrentDirectory(), "input");
 
