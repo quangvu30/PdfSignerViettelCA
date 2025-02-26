@@ -218,7 +218,7 @@ namespace GrpcServiceSigner.Services
 
         public async Task<string> SignAsync(string filePath, string description, string documentId, string signatureImgPath, int numPageSign, int x, int y, int w, int h)
         {
-            string o = Path.Join(output, Path.GetFileName(filePath));
+            string o = Path.Join(output, Path.GetFileName(filePath).Replace("presign_", "signed_"));
             await Login();
             await GetCertificateInfo();
             await SignDocument(filePath, description, documentId, signatureImgPath, numPageSign, x, y, w, h);

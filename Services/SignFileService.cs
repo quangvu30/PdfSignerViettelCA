@@ -26,7 +26,7 @@ namespace GrpcServiceSigner.Services
             ClientPayload user = clients[req.UserId];
             RemoteSigner remoteSigner = new RemoteSigner(user.ClientSecret, user.ClientId, user.ProfileId, req.UserId);
             // Save file to input
-            string pdfFile = Path.Join(input, $"{req.FileName}.pdf");
+            string pdfFile = Path.Join(input, $"presign_{req.FileName}.pdf");
             string signatureImg = Path.Join(input, $"{req.FileName}.png");
             await File.WriteAllBytesAsync(pdfFile, req.Chunk.ToByteArray());
             await File.WriteAllBytesAsync(signatureImg, req.SignatureImg.ToByteArray());
